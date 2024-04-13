@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "b6a2db39-b20f-41d0-a546-fd67b4a5aada",
+		"name": "Identify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31277320"
+	},
+	"item": [
+		{
+			"name": "Identify as a rest provider",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"15828\": {\n            \"Offer\": {\n                \"campaign_id\": 15828,\n                \"store_id\": null,\n                \"tracking_type\": \"CPA\",\n                \"campaign_vertical\": \"professional_finance\",\n                \"currency_name_singular\": \"coin\",\n                \"currency_name_plural\": \"coins\",\n                \"network_epc\": \"4.8359\",\n                \"icon\": \"https://some.url\",\n                \"name\": \"Sofi\",\n                \"tracking_url\": \"https://some.url\",\n                \"instructions\": \"Register with VALID personal information, Make a minimum deposit of $50,Redeem your points! *New Users Only!\",\n                \"disclaimer\": null,\n                \"description\": \"SoFi is a one-stop shop for your finances, designed to help you Get Your Money Right.\",\n                \"short_description\": \"Make a Deposit to Earn!\",\n                \"offer_sticker_text_1\": \"RECOMMENDED\",\n                \"offer_sticker_text_2\": null,\n                \"offer_sticker_text_3\": null,\n                \"offer_sticker_color_1\": \"D100BC\",\n                \"offer_sticker_color_2\": \"FFFFFF\",\n                \"offer_sticker_color_3\": \"FFFFFF\",\n                \"sort_order_setting\": null,\n                \"category_1\": \"free\",\n                \"category_2\": null,\n                \"amount\": 53550,\n                \"payout_usd\": 69.25,\n                \"start_datetime\": \"2022-04-19 11:58:30\",\n                \"end_datetime\": \"2042-04-19 04:59:00\",\n                \"is_multi_reward\": false\n            },\n            \"Country\": {\n                \"include\": {\n                    \"US\": {\n                        \"id\": 243,\n                        \"code\": \"US\",\n                        \"name\": \"United States\"\n                    }\n                },\n                \"exclude\": []\n            },\n            \"State\": {\n                \"include\": [],\n                \"exclude\": []\n            },\n            \"City\": {\n                \"include\": [],\n                \"exclude\": []\n            },\n            \"Connection_Type\": {\n                \"cellular\": true,\n                \"wifi\": true\n            },\n            \"Device\": {\n                \"include\": [],\n                \"exclude\": []\n            },\n            \"OS\": {\n                \"android\": false,\n                \"ios\": true,\n                \"web\": true,\n                \"min_ios\": null,\n                \"max_ios\": null,\n                \"min_android\": null,\n                \"max_android\": null\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/offer/identify",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"offer",
+						"identify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Identify as a kafka provider",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"pubid\": \"1\",\n    \"appid\": 1,\n    \"country\": \"\",\n    \"platform\": \"all\"\n  },\n  \"response\": {\n    \"currency_name\": \"Coins\",\n    \"offers_count\": 2729,\n    \"offers\": [\n      {\n        \"offer_id\": \"19524555\",\n        \"offer_name\": \"MyGym - iOS\",\n        \"offer_desc\": \"Play and reach level 23 within 14 days.\",\n        \"call_to_action\": \"Play and reach level 23 within 14 days.\",\n        \"disclaimer\": \"This offer rewards within 25 hours. New users only.\",\n        \"offer_url\": \"https://some.url\",\n        \"offer_url_easy\": \"https://some.url\",\n        \"payout\": 10.675,\n        \"payout_type\": \"cpe\",\n        \"amount\": 8873,\n        \"image_url\": \"https://some.url\",\n        \"image_url_220x124\": \"https://some.url\",\n        \"countries\": [\n          \"NZ\"\n        ],\n        \"platform\": \"mobile\",\n        \"device\": \"iphone_ipad\",\n        \"category\": {\n          \"9\": \"Mobile Apps\"\n        },\n        \"last_modified\": 1645095666,\n        \"preview_url\": \"https://some.url\",\n        \"package_id\": \"idnumbers\",\n        \"verticals\": [\n          {\n            \"vertical_id\": \"4\",\n            \"vertical_name\": \"Lifestyle\"\n          },\n          {\n            \"vertical_id\": \"11\",\n            \"vertical_name\": \"Health\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/offer/identify",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"offer",
+						"identify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Failed to identify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/offer/identify",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"offer",
+						"identify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

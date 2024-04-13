@@ -1,7 +1,7 @@
 import { InstanceFactory } from '.';
 import {
   KafkaOfferPayloadDto,
-  KafkaPayload,
+  KafkaPayloadDto,
   Platform,
 } from '../../providers/kafka/typedefs';
 import { faker } from '@faker-js/faker';
@@ -28,8 +28,8 @@ export const KafkaOfferPayloadDtoRecordFactory =
     }),
   );
 
-export const KafkaPayloadRecordFactory = new InstanceFactory<KafkaPayload>(
-  (): KafkaPayload => ({
+export const KafkaPayloadRecordFactory = new InstanceFactory<KafkaPayloadDto>(
+  (): KafkaPayloadDto => ({
     query: {
       appid: faker.number.int(),
       country: faker.location.countryCode(),

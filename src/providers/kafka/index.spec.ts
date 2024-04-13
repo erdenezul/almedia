@@ -1,10 +1,10 @@
+import { KafkaProvider } from '.';
 import {
   KafkaOfferPayloadDtoRecordFactory,
   KafkaPayloadRecordFactory,
 } from '../../offer/__mocks__/kafka';
-import { KafkaProvider } from '.';
-import { Platform } from './typedefs';
 import { payload } from '../../offer/data/offer1.payload';
+import { Platform } from './typedefs';
 
 describe('KafkaProvider', () => {
   let provider: KafkaProvider;

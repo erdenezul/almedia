@@ -1,4 +1,4 @@
-import { IsString, IsUrl } from 'class-validator';
+import { IsString, IsUrl, ValidateNested } from 'class-validator';
 
 export class RestOfferPayloadDto {
   @IsString()
@@ -28,5 +28,6 @@ export class OsInfo {
 
 export class RestPayloadDto {
   status: string;
+  @ValidateNested()
   data: Record<string, { Offer: RestOfferPayloadDto; OS: OsInfo }>;
 }

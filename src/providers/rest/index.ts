@@ -38,3 +38,5 @@ export class RestProvider implements OfferProvider {
     };
   }
 }
+
+export * from './typedefs';

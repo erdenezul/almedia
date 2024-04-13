@@ -1,6 +1,15 @@
-import { IsArray, IsEnum, IsString, IsUrl } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  ArrayMinSize,
+  IsArray,
+  IsEnum,
+  IsNumber,
+  IsString,
+  IsUrl,
+  ValidateNested,
+} from 'class-validator';
 
-export class KafkaVerticalDTO {
+export class KafkaVerticalDto {
   @IsString()
   vertical_id: string;
 
@@ -55,20 +64,42 @@ export class KafkaOfferPayloadDto {
   @IsString()
   package_id: string;
 
-  @IsArray({ each: true })
-  verticals: KafkaVerticalDTO[];
+  @IsArray({})
+  @ValidateNested({ each: true })
+  @Type(() => KafkaVerticalDto)
+  verticals: KafkaVerticalDto[];
 }
 
-export interface KafkaPayload {
-  query: {
-    pubid: string;
-    appid: number;
-    country: string;
-    platform: string;
-  };
-  response: {
-    currency_name: string;
-    offers_count: number;
-    offers: KafkaOfferPayloadDto[];
-  };
+export class QueryDto {
+  @IsString()
+  pubid: string;
+  @IsNumber()
+  appid: number;
+  @IsString()
+  country: string;
+  @IsString()
+  platform: string;
+}
+
+export class ResponseDto {
+  @IsString()
+  currency_name: string;
+  @IsNumber()
+  offers_count: number;
+
+  @IsArray({})
+  @ValidateNested({ each: true })
+  @ArrayMinSize(1)
+  @Type(() => KafkaOfferPayloadDto)
+  offers: KafkaOfferPayloadDto[];
+}
+
+export class KafkaPayloadDto {
+  @ValidateNested({ always: true })
+  @Type(() => QueryDto)
+  query: QueryDto;
+
+  @ValidateNested()
+  @Type(() => ResponseDto)
+  response: ResponseDto;
 }

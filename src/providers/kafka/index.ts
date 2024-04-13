@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { Offer } from '../../offer/offer.entity';
 import { OfferProvider } from '../provider.interface';
-import { Offer } from 'src/offer/offer.entity';
-import { KafkaOfferPayloadDto, KafkaPayload, Platform } from './typedefs';
+import { KafkaOfferPayloadDto, KafkaPayloadDto, Platform } from './typedefs';
 
 @Injectable()
 export class KafkaProvider implements OfferProvider {
@@ -10,14 +10,15 @@ export class KafkaProvider implements OfferProvider {
   /**
    * @returns Offer list without id
    */
-  parseOffer(payload: KafkaPayload): Omit<Offer, 'id'>[] {
-    this.logger.log('[Kafka provider: parsing offers:]', payload);
+  parseOffer(payload: KafkaPayloadDto): Omit<Offer, 'id'>[] {
+    this.logger.log('[parsing offers:]', payload);
     try {
       return payload.response.offers.map((offer) => this.extractOffer(offer));
     } catch (error) {
-      this.logger.warn('[Kafka provider: failed to parse offers:]', payload);
-      this.logger.warn('Put this payload in dead letter queue', payload);
+      this.logger.warn('[failed to parse offers:]', payload);
+      this.logger.warn('[Put this payload in dead letter queue:]', payload);
     }
+    return [];
   }
 
   /**
@@ -56,3 +57,5 @@ export class KafkaProvider implements OfferProvider {
     };
   }
 }
+
+export * from './typedefs';

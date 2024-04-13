@@ -1,8 +1,11 @@
+import { KafkaProvider, RestProvider } from '@almedia/providers';
 import { Test, TestingModule } from '@nestjs/testing';
-import { OfferController } from './offer.controller';
+import { KafkaPayloadRecordFactory } from './__mocks__/kafka';
+import { RestPayloadDtoRecordFactory } from './__mocks__/rest';
 import { payload as kafkaPayload } from './data/offer1.payload';
-import { OfferService } from './offer.service';
 import { payload as restPayload } from './data/offer2.payload';
+import { OfferController } from './offer.controller';
+import { OfferService } from './offer.service';
 
 describe('OfferController', () => {
   let controller: OfferController;
@@ -10,7 +13,7 @@ describe('OfferController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [OfferController],
-      providers: [OfferService],
+      providers: [OfferService, KafkaProvider, RestProvider],
     }).compile();
 
     controller = module.get<OfferController>(OfferController);
@@ -32,6 +35,23 @@ describe('OfferController', () => {
 
     it('should fail to identify', () => {
       expect(controller.identifyProvider({})).toBe('unknown');
+    });
+  });
+
+  describe('parse kafka', () => {
+    const payload = KafkaPayloadRecordFactory.getSingleRecord();
+
+    it('should return ok', () => {
+      const result = controller.parseKafka(payload);
+      expect(result).toBe('ok');
+    });
+  });
+
+  describe('parse rest', () => {
+    const payload = RestPayloadDtoRecordFactory.getSingleRecord();
+
+    it('should return ok', () => {
+      expect(controller.parseRest(payload)).toBe('ok');
     });
   });
 });
