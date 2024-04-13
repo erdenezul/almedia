@@ -4,6 +4,7 @@ import {
 } from '../../offer/__mocks__/kafka';
 import { KafkaProvider } from '.';
 import { Platform } from './typedefs';
+import { payload } from '../../offer/data/offer1.payload';
 
 describe('KafkaProvider', () => {
   let provider: KafkaProvider;
@@ -13,9 +14,28 @@ describe('KafkaProvider', () => {
   });
 
   describe('parse offer', () => {
+    it('should parse example offer', () => {
+      // using any here because I didn't type all the fields
+      const result = provider.parseOffer(payload as any);
+      expect(result[0]).toStrictEqual({
+        name: payload.response.offers[0].offer_name,
+        description: payload.response.offers[0].offer_desc,
+        externalOfferId: payload.response.offers[0].offer_id,
+        requirements: payload.response.offers[0].call_to_action,
+        offerUrlTemplate: payload.response.offers[0].offer_url,
+        providerName: 'kafka',
+        thumbnail: payload.response.offers[0].image_url,
+        slug: '@todo',
+        isIos: 1,
+        isDesktop: 0,
+        isAndroid: 0,
+      });
+    });
+
     it('should parse platform information', () => {
       const payload = KafkaPayloadRecordFactory.getSingleRecord({});
       const [first, ...rest] = provider.parseOffer(payload);
+      expect(rest).toBeDefined();
       expect(first.isIos).toBe(1);
       expect(first.isDesktop).toBe(0);
       expect(first.isAndroid).toBe(0);

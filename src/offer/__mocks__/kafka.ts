@@ -6,7 +6,6 @@ import {
 } from '../../providers/kafka/typedefs';
 import { faker } from '@faker-js/faker';
 
-
 export const KafkaOfferPayloadDtoRecordFactory =
   new InstanceFactory<KafkaOfferPayloadDto>(
     (): KafkaOfferPayloadDto => ({

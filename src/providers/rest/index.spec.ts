@@ -1,6 +1,6 @@
-import { payload } from '../../offer/data/offer2.payload';
 import { RestProvider } from '.';
-import { isDeepStrictEqual } from 'util';
+import { RestPayloadDtoRecordFactory } from '../../offer/__mocks__/rest';
+import { payload } from '../../offer/data/offer2.payload';
 
 describe('RestProvider', () => {
   let provider: RestProvider;
@@ -27,5 +27,11 @@ describe('RestProvider', () => {
       requirements:
         'Register with VALID personal information, Make a minimum deposit of $50,Redeem your points! *New Users Only!',
     });
+  });
+  it('should return multiple offers', () => {
+    const payload = RestPayloadDtoRecordFactory.getSingleRecord();
+
+    const result = provider.parseOffer(payload);
+    expect(result.length).toBe(2);
   });
 });

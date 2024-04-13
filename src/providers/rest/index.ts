@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Offer } from '../..//offer/offer.entity';
 import { OfferProvider } from '../provider.interface';
-import { Offer } from 'src/offer/offer.entity';
 import { OsInfo, RestOfferPayloadDto, RestPayloadDto } from './typedefs';
 
 @Injectable()

@@ -1,7 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-interface IOffer {
-    
-}
+interface IOffer {}
 @Entity('offers')
 export class Offer implements IOffer {
   // primary column for offer id
